@@ -14,6 +14,6 @@ message C2SLogin {
 	required string password = 2;
 }
 
-// message C2SLoginResp {
-// 	required int32 result = 1; // 0 成功，1失败
-// }
+message C2SLogout {
+
+}

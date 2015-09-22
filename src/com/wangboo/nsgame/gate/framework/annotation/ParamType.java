@@ -1,7 +1,7 @@
 package com.wangboo.nsgame.gate.framework.annotation;
 
 /**
- * 特殊入参类型
+ * 特殊入参类型[-1,-100]为系统预留
  * @author wangboo
  *
  */
@@ -13,13 +13,8 @@ public class ParamType {
 	public static final int SESSION = -1;
 	
 	/**
-	 * 玩家数据
-	 */
-	public static final int GAMEPLAYER = -2;
-	
-	/**
 	 * 数据报文
 	 */
-	public static final int DATA_PKG = -3;
+	public static final int DATA_PKG = -2;
 	
 }

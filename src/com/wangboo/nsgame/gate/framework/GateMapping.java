@@ -1,7 +1,9 @@
 package com.wangboo.nsgame.gate.framework;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 
@@ -18,6 +20,8 @@ public class GateMapping {
 	private Method parseMethod;
 	private List<GateDefine> gateList;
 	private ApplicationContext context;
+	
+	private Map<Integer, IGateSpecFieldInject> specInjector = new HashMap<>();
 	
 	public GateMapping(ApplicationContext context, Class<?> messageIdClass, Class<?> messageClass) {
 		this.context = context;
@@ -42,14 +46,8 @@ public class GateMapping {
 		this.gateList = gateList;
 	}
 	
-	/**
-	 * 映射
-	 * @param data
-	 */
-	public void mapping(byte[] data) {
+	public void mapping(GeneratedMessage msg, Object session) {
 		try{
-			Object msg = parseMethod.invoke(null, data);
-//			System.out.println("parse: \n" + msg);
 			MessageId messageId = (MessageId) msg.getClass().getMethod("getMsgId").invoke(msg);
 			int id = messageId.getNumber();
 			boolean processed = false;
@@ -57,33 +55,48 @@ public class GateMapping {
 				if(gd.accept(id)) {
 					// 处理消息
 					processed = true;
-					process((GeneratedMessage)msg, gd);
+					process((GeneratedMessage)msg, gd, session);
+					break;
 				}
 			}
+			if(!processed) {
+				System.out.println("消息没有被处理：\n" + msg);
+			}
 		}catch(Exception e) {
-			
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 映射
+	 * @param data
+	 */
+	public void mapping(byte[] data, Object session) {
+		try{
+			Object msg = parseMethod.invoke(null, data);
+			mapping((GeneratedMessage)msg, session);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	private void process(GeneratedMessage msg, GateDefine gateDefine) {
+	private void process(GeneratedMessage msg, GateDefine gateDefine, Object session) {
 		try{
 			GeneratedMessage data = (GeneratedMessage) msg.getField(gateDefine.fieldDescriptor);
 			int size = gateDefine.argDefines.length;
 			Object[] args = new Object[size];
 			for(int i=0;i<size;i++) {
 				ParamDefine paramDefine = gateDefine.argDefines[i];
-				switch(paramDefine.fieldId) {
-				case ParamType.SESSION:
-					args[i] = null;
-					break;
-				case ParamType.GAMEPLAYER:
-					args[i] = null;
-					break;
-				case ParamType.DATA_PKG:
-					args[i] = data;
-					break;
-				default:
+				int fieldId = paramDefine.fieldId;
+				if(fieldId >= 0) {
 					args[i] = data.getField(paramDefine.fieldDescriptor);
+				}else if(fieldId == ParamType.SESSION) {
+					args[i] = session;
+				}else if(fieldId == ParamType.DATA_PKG) {
+					args[i] = data;
+				}else if(fieldId < 0) {
+					IGateSpecFieldInject injector = specInjector.get(fieldId);
+					args[i] = injector.getSpecField(msg, session);
 				}
 			}
 			gateDefine.gateMethod.invoke(gateDefine.gateObj, args);
@@ -97,6 +110,21 @@ public class GateMapping {
 		GateScanner gs = new GateScanner(context, messageIdClass, messageClass);
 		gs.setScanPackage(pkg);
 		gateList = gs.scan();
+	}
+	
+	/**
+	 * 增加特殊字段注入器
+	 * @param flag
+	 * @param injector
+	 */
+	public void addSpecInjector(Integer flag, IGateSpecFieldInject injector) {
+		if(flag >= 0) {
+			throw new IllegalArgumentException("flag can`t be positive!");
+		}
+		if(specInjector.containsKey(flag)) {
+			System.err.println("addSpecInjector injector repeat !!! ");
+		}
+		specInjector.put(flag, injector);
 	}
 	
 	

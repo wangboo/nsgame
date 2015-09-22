@@ -1,5 +1,7 @@
 package com.wangboo.nsgame.gate;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 import com.wangboo.nsgame.gate.framework.annotation.Gate;
@@ -13,6 +15,7 @@ public class LoginGate {
 
 	@Gate(msgid=MessageId.C2SLoginId_VALUE, fieldid=C2SMessage.C2SLOGIN_FIELD_NUMBER, data=C2SLogin.class)
 	public void login(
+			@Param(fieldid=-101) Map<String, Object> session,
 			@Param(fieldid=C2SLogin.USERNAME_FIELD_NUMBER)String username, 
 			@Param(fieldid=C2SLogin.PASSWORD_FIELD_NUMBER)String password) {
 		
