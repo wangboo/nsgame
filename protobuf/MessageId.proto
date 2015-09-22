@@ -1,0 +1,6 @@
+package com.wangboo.nsgame.protocol;
+option java_outer_classname="MessageProto";
+
+enum MessageId {
+	C2SLoginId = 1;
+}

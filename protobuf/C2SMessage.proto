@@ -1,0 +1,19 @@
+package com.wangboo.nsgame.protocol;
+
+import "MessageId.proto";
+option java_outer_classname="C2SMessageProto";
+
+message C2SMessage {
+	required MessageId 			msgId = 1;
+	optional C2SLogin 			c2sLogin = 2;
+	optional C2SLogout 			c2sLogout = 3;
+}
+
+message C2SLogin {
+	required string username = 1;
+	required string password = 2;
+}
+
+// message C2SLoginResp {
+// 	required int32 result = 1; // 0 成功，1失败
+// }

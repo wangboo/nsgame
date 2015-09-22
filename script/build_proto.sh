@@ -1,0 +1,1 @@
+protoc --java_out=/Users/wangboo/Documents/workspace/nsgame/src --proto_path=/Users/wangboo/Documents/workspace/nsgame/protobuf/ /Users/wangboo/Documents/workspace/nsgame/protobuf/*.proto
