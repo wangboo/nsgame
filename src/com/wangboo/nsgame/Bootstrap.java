@@ -30,6 +30,7 @@ public class Bootstrap {
 		Map<String, Object> session = new HashMap<>();
 		final String userIdFlag = "__userId__";
 		gm.addSpecInjector(-101, (msg, s)->{
+			@SuppressWarnings("unchecked")
 			Map<String, Object> sessionMap = (Map<String, Object>) s;
 			if(sessionMap.containsKey(userIdFlag)) {
 				int id = (int) sessionMap.get(userIdFlag);
