@@ -22,10 +22,13 @@ public class MutiProcessorServer<T> extends AbsServer<T> {
 	private ProcessorFactory<T> m_factory;
 	private List<IProcessor<T>> m_processorList;
 	
-	public MutiProcessorServer(int size, ProcessorFactory<T> factory) {
+	public MutiProcessorServer(int size) {
 		m_size = size;
-		m_factory = factory;
 		m_processorList = new ArrayList<>();
+	}
+	
+	public void setProcessorFactory(ProcessorFactory<T> factory) {
+		m_factory = factory;
 	}
 	
 	@Override

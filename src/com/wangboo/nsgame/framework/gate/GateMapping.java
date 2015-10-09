@@ -86,7 +86,7 @@ public class GateMapping {
 			int size = gateDefine.argDefines.length;
 			Object[] args = new Object[size];
 			for(int i=0;i<size;i++) {
-				ParamDefine paramDefine = gateDefine.argDefines[i];
+				ParamDefine paramDefine =  gateDefine.argDefines[i];
 				int fieldId = paramDefine.fieldId;
 				if(fieldId >= 0) {
 					args[i] = data.getField(paramDefine.fieldDescriptor);
@@ -99,7 +99,10 @@ public class GateMapping {
 					args[i] = injector.getSpecField(msg, session);
 				}
 			}
-			gateDefine.gateMethod.invoke(gateDefine.gateObj, args);
+			Object ret = gateDefine.gateMethod.invoke(gateDefine.gateObj, args);
+			if(ret != null && ret instanceof GeneratedMessage) {
+				Gateway.getInstance().send((GeneratedMessage) ret);
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
