@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework;
+package com.wangboo.nsgame.framework.gate;
 
 import com.google.protobuf.GeneratedMessage;
 

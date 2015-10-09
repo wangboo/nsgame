@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework.define;
+package com.wangboo.nsgame.framework.gate.define;
 
 import com.google.protobuf.Descriptors.FieldDescriptor;
 

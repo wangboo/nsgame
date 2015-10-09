@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.wangboo.nsgame.gate.LoginGate;
-import com.wangboo.nsgame.gate.framework.GateMapping;
-import com.wangboo.nsgame.gate.framework.GateScanner;
+import com.wangboo.nsgame.framework.gate.GateMapping;
+import com.wangboo.nsgame.framework.gate.GateScanner;
+import com.wangboo.nsgame.framework.gate.LoginGate;
 import com.wangboo.nsgame.protocol.C2SMessageProto.C2SLogin;
 import com.wangboo.nsgame.protocol.C2SMessageProto.C2SMessage;
 import com.wangboo.nsgame.protocol.MessageProto.MessageId;

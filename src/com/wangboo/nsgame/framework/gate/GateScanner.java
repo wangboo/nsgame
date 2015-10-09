@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework;
+package com.wangboo.nsgame.framework.gate;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -16,10 +16,10 @@ import org.springframework.context.ApplicationContext;
 
 import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.wangboo.nsgame.gate.framework.annotation.Gate;
-import com.wangboo.nsgame.gate.framework.annotation.Param;
-import com.wangboo.nsgame.gate.framework.define.GateDefine;
-import com.wangboo.nsgame.gate.framework.define.ParamDefine;
+import com.wangboo.nsgame.framework.gate.annotation.Gate;
+import com.wangboo.nsgame.framework.gate.annotation.Param;
+import com.wangboo.nsgame.framework.gate.define.GateDefine;
+import com.wangboo.nsgame.framework.gate.define.ParamDefine;
 
 /**
  * 网关定义

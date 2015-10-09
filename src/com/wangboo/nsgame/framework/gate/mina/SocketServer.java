@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework.mina;
+package com.wangboo.nsgame.framework.gate.mina;
 
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.firewall.BlacklistFilter;

@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework.annotation;
+package com.wangboo.nsgame.framework.gate.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,16 +8,31 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 参数声明
+ * 网关声明
  * @author wangboo
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
+@Target(ElementType.METHOD)
 @Inherited
 @Documented
-public @interface Param {
-	
+public @interface Gate {
+
+	/**
+	 * 报文内容字段id
+	 * @return
+	 */
 	public int fieldid();
+	/**
+	 * 报文类型
+	 * @return
+	 */
+	public int msgid();
+	
+	/**
+	 * 数据结构
+	 * @return
+	 */
+	public Class<?> data();
 	
 }

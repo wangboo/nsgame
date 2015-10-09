@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework;
+package com.wangboo.nsgame.framework.gate;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -8,9 +8,9 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 
 import com.google.protobuf.GeneratedMessage;
-import com.wangboo.nsgame.gate.framework.annotation.ParamType;
-import com.wangboo.nsgame.gate.framework.define.GateDefine;
-import com.wangboo.nsgame.gate.framework.define.ParamDefine;
+import com.wangboo.nsgame.framework.gate.annotation.ParamType;
+import com.wangboo.nsgame.framework.gate.define.GateDefine;
+import com.wangboo.nsgame.framework.gate.define.ParamDefine;
 import com.wangboo.nsgame.protocol.MessageProto.MessageId;
 
 public class GateMapping {

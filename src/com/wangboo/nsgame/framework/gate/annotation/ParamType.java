@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework.annotation;
+package com.wangboo.nsgame.framework.gate.annotation;
 
 /**
  * 特殊入参类型[-1,-100]为系统预留

@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework.define;
+package com.wangboo.nsgame.framework.gate.define;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

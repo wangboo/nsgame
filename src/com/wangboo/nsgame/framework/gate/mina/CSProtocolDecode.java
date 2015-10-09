@@ -1,4 +1,4 @@
-package com.wangboo.nsgame.gate.framework.mina;
+package com.wangboo.nsgame.framework.gate.mina;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
